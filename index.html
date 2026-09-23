@@ -1714,6 +1714,26 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   targets.forEach(function (el) { io.observe(el); });
+   document.addEventListener("click", e => {
+  const burger = e.target.closest("#burger");
+  if (burger) {
+    const menu = document.getElementById("mobileMenu");
+    const open = menu.classList.toggle("open");
+    burger.classList.toggle("active", open);
+    burger.setAttribute("aria-expanded", String(open));
+    return;
+  }
+  if (e.target.closest("#mobileMenu a")) {
+    document.getElementById("mobileMenu").classList.remove("open");
+    document.getElementById("burger").classList.remove("active");
+    document.getElementById("burger").setAttribute("aria-expanded", "false");
+  }
+});
+
+window.addEventListener("scroll", () => {
+  const h = document.getElementById("siteHeader");
+  if (h) h.classList.toggle("scrolled", window.scrollY > 10);
+});
 })();
 </script>
 
